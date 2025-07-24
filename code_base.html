@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GATE Prep Club - Rustamji Institute of Technology</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* --- MODIFIED CSS FOR LOGO --- */
+        .logo img {
+            height: 40px;
+            vertical-align: middle;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        main {
+            margin-top: 80px;
+        }
+
+        .hero {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 4rem 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 107, 107, 0.4);
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            margin: 2rem 0;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .team-member {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-member::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .member-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: #999;
+            font-size: 0.9rem;
+            border: 4px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .member-photo::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .member-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .alumni-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            margin: 2rem 0;
+        }
+
+        .alumni-section h2 {
+            color: white;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .alumni-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .alumni-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .alumni-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .alumni-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 0.9rem;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .alumni-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        /* --- ADDED CSS FOR BADGES --- */
+        .achievement-badge {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin: 0.5rem 0;
+            display: inline-block;
+        }
+
+        .alumni-achievement {
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin: 0.2rem;
+            display: inline-block;
+        }
+
+        .prep-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .gate-card::before {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+
+        .placement-card::before {
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+        }
+
+        .banking-card::before {
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .gate-card .category-icon {
+            color: #667eea;
+        }
+
+        .placement-card .category-icon {
+            color: #f093fb;
+        }
+
+        .banking-card .category-icon {
+            color: #4facfe;
+        }
+
+        .category-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .priority-badge {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+
+        .coordinator {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+
+        .coordinator::before {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: scale(1.05);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .activities {
+            list-style: none;
+            padding: 0;
+        }
+
+        .activities li {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .activities li::before {
+            content: '✓';
+            margin-right: 1rem;
+            font-weight: bold;
+        }
+
+        .activities li:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 2rem;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+        }
+
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: floatShapes 15s infinite linear;
+        }
+
+        .shape:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            top: 60%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+
+        .shape:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 10s;
+        }
+
+        @keyframes floatShapes {
+            0% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-30px) rotate(120deg); }
+            66% { transform: translateY(30px) rotate(240deg); }
+            100% { transform: translateY(0px) rotate(360deg); }
+        }
+        /* Add this CSS to your existing <style> block */
+    .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem; /* Adjust spacing between logo and text */
+    }
+
+    .logo-container img {
+        height: 40px; /* Or your desired logo height */
+    }
+
+    .club-title {
+        font-size: 1.8rem;
+        font-weight: bold;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    </style>
+</head>
+<body>
+    <div class="floating-shapes">
+        <div class="shape">🎯</div>
+        <div class="shape">📚</div>
+        <div class="shape">🚀</div>
+    </div>
+
+    <header>
+    <nav class="container">
+        <div class="logo-container">
+            <a href="#home" class="logo">
+                <img src="images/club_logo.jpg" alt="NEEV Club Logo">
+            </a>
+            <span class="club-title">NEEV CLUB</span>
+        </div>
+        
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#alumni">Alumni</a></li>
+            <li><a href="#activities">Activities</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+    <main class="container">
+        <section id="home" class="hero">
+            <h1>NEEV Club</h1>
+            <p>Rustamji Institute of Technology</p>
+            <p>Empowering Engineering Dreams Through Excellence</p>
+            <p style="font-size: 1.1rem; margin-top: 1rem; opacity: 0.9;">GATE • Placements • Banking • PSU Exams</p>
+            <a href="#about" class="cta-button">Explore Our Journey</a>
+        </section>
+
+        <section id="about" class="section">
+            <h2>About Our Club</h2>
+            <p style="font-size: 1.2rem; text-align: center; margin-bottom: 2rem; color: #555;">
+                NEEV Club at Rustamji Institute of Technology is a comprehensive career preparation hub dedicated to helping students achieve their professional goals. While our primary focus is on <strong>GATE preparation</strong>, we also provide guidance for campus placements, banking sector opportunities, and PSU examinations. Our holistic approach ensures students are well-prepared for diverse career paths in engineering and beyond.
+            </p>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number">500+</div>
+                    <div>Students Guided</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">85%</div>
+                    <div>Success Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div>Mock Tests</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div>Support</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Our Preparation Programs</h2>
+            <p style="text-align: center; margin-bottom: 2rem; color: #666; font-size: 1.1rem;">
+                Comprehensive career preparation across multiple domains
+            </p>
+            
+            <div class="prep-categories">
+                <div class="category-card gate-card">
+                    <div class="priority-badge">PRIMARY FOCUS</div>
+                    <div class="category-icon">🎯</div>
+                    <h3>GATE Preparation</h3>
+                    <p><strong>Our Core Strength</strong></p>
+                    <ul style="text-align: left; margin-top: 1rem;">
+                        <li>Comprehensive syllabus coverage</li>
+                        <li>Subject-wise expert guidance</li>
+                        <li>Regular mock tests & analysis</li>
+                        <li>Previous year papers practice</li>
+                        <li>IIT/NIT admission guidance</li>
+                        <li>PSU recruitment preparation</li>
+                    </ul>
+                </div>
+                
+                <div class="category-card placement-card">
+                    <div class="category-icon">💼</div>
+                    <h3>Campus Placements</h3>
+                    <p><strong>Industry Readiness</strong></p>
+                    <ul style="text-align: left; margin-top: 1rem;">
+                        <li>Technical interview preparation</li>
+                        <li>Coding practice sessions</li>
+                        <li>Resume building workshops</li>
+                        <li>Group discussion training</li>
+                        <li>Company-specific preparation</li>
+                        <li>Soft skills development</li>
+                    </ul>
+                </div>
+                
+                <div class="category-card banking-card">
+                    <div class="category-icon">🏦</div>
+                    <h3>Banking Sector</h3>
+                    <p><strong>Financial Career Path</strong></p>
+                    <ul style="text-align: left; margin-top: 1rem;">
+                        <li>SBI PO/Clerk preparation</li>
+                        <li>IBPS exam guidance</li>
+                        <li>Quantitative aptitude training</li>
+                        <li>English & reasoning skills</li>
+                        <li>Current affairs updates</li>
+                        <li>Interview preparation</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Why Choose Us?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Multi-Domain Preparation</h3>
+                    <p>Comprehensive guidance for GATE, placements, banking exams, and PSU recruitments under one roof.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Expert Mentorship</h3>
+                    <p>Guidance from experienced faculty and successful GATE qualifiers to navigate your journey.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Industry-Academic Bridge</h3>
+                    <p>Seamless transition from academic excellence to industry readiness with practical training and exposure.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <h3>Peer Learning</h3>
+                    <p>Collaborative learning environment with study groups and peer-to-peer knowledge sharing.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="team" class="section">
+            <h2>Our Leadership Team</h2>
+            
+            <div class="team-grid">
+                <div class="team-member coordinator">
+                    <div class="member-photo">
+                        <img src="https://via.placeholder.com/120x120/667eea/ffffff?text=YS" alt="Yograj Sharma" onerror="this.style.display='none'; this.parentNode.innerHTML='Photo Coming Soon';">
+                    </div>
+                    <h3>Yograj Sharma</h3>
+                    <p><strong>Faculty Coordinator</strong></p>
+                    <p>Experienced educator with over 10 years in GATE preparation mentoring. Passionate about student success and innovative teaching methodologies.</p>
+                </div>
+            </div>
+
+            <h3 style="text-align: center; margin: 3rem 0 2rem; color: #667eea; font-size: 2rem;">Student Leadership</h3>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="https://via.placeholder.com/120x120/764ba2/ffffff?text=AK" alt="Anurag Kumar" onerror="this.style.display='none'; this.parentNode.innerHTML='Photo Coming Soon';">
+                    </div>
+                    <h3>Anurag Kumar</h3>
+                    <p><strong>Lead Member</strong></p>
+                    <p>Final year student specializing in coordination of study materials and organizing doubt clearing sessions.</p>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="https://via.placeholder.com/120x120/f093fb/ffffff?text=AS" alt="Adarsh Kumar Singh" onerror="this.style.display='none'; this.parentNode.innerHTML='Photo Coming Soon';">
+                    </div>
+                    <h3>Adarsh Kumar Singh</h3>
+                    <p><strong>Lead Member</strong></p>
+                    <p>Expert in mock test coordination and performance analysis. Helps students identify improvement areas.</p>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="https://via.placeholder.com/120x120/a8edea/333333?text=SD" alt="Shubham Kumar Dubey" onerror="this.style.display='none'; this.parentNode.innerHTML='Photo Coming Soon';">
+                    </div>
+                    <h3>Shubham Kumar Dubey</h3>
+                    <p><strong>Lead Member</strong></p>
+                    <p>Technical coordinator managing online resources and digital learning platforms for the club.</p>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="https://via.placeholder.com/120x120/ffecd2/333333?text=PY" alt="Priya Yadav" onerror="this.style.display='none'; this.parentNode.innerHTML='Photo Coming Soon';">
+                    </div>
+                    <h3>Priya Yadav</h3>
+                    <p><strong>Lead Member</strong></p>
+                    <p>Communications lead organizing workshops, seminars, and maintaining liaison with successful alumni.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="alumni" class="alumni-section">
+            <div class="container">
+                <h2>Our Success Stories - Alumni Achievements</h2>
+                <p style="text-align: center; font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.9;">
+                    Meet our distinguished alumni who have achieved remarkable success in GATE and their respective careers
+                </p>
+                
+                <div class="alumni-grid">
+                    <div class="alumni-card">
+                        <div class="alumni-photo">
+                            <img src="https://via.placeholder.com/100x100/ffffff/667eea?text=Alumni1" alt="Alumni 1" onerror="this.style.display='none'; this.parentNode.innerHTML='Photo Coming Soon';">
+                        </div>
+                        <h3>Rajesh Kumar</h3>
+                        <div class="achievement-badge">GATE AIR 45</div>
+                        <div class="alumni-achievement">Google SWE</div>
+                        <p><strong>IIT Delhi - M.Tech CSE</strong></p>
+                        <p>Currently working as Senior Software Engineer at Google. Credits NEEV Club for structured preparation and mock tests.</p>
+                        <p style="font-style: italic; margin-top: 1rem;">"NEEV Club's holistic approach helped me excel in both GATE and placements"</p>
+                    </div>
+                    
+                    <div class="alumni-card">
+                        <div class="alumni-photo">
+                            <img src="https://via.placeholder.com/100x100/ffffff/764ba2?text=Alumni2" alt="Alumni 2" onerror="this.style.display='none'; this.parentNode.innerHTML='Photo Coming Soon';">
+                        </div>
+                        <h3>Priya Sharma</h3>
+                        <div class="achievement-badge">GATE AIR 78</div>
+                        <div class="alumni-achievement">PhD Scholar</div>
+                        <p><strong>IIT Bombay - M.Tech ECE</strong></p>
+                        <p>Research Scholar and Teaching Assistant. Now pursuing PhD in Signal Processing with multiple publications.</p>
+                        <p style="font-style: italic; margin-top: 1rem;">"The comprehensive preparation at NEEV opened multiple career doors"</p>
+                    </div>
+                    
+                    <div class="alumni-card">
+                        <div class="alumni-photo">
+                            <img src="https://via.placeholder.com/100x100/ffffff/f093fb?text=Alumni3" alt="Alumni 3" onerror="this.style.display='none'; this.parentNode.innerHTML='Photo Coming Soon';">
+                        </div>
+                        <h3>Amit Patel</h3>
+                        <div class="achievement-badge">GATE AIR 156</div>
+                        <div class="alumni-achievement">Design Engineer</div>
+                        <p><strong>IIT Kanpur - M.Tech ME</strong></p>
+                        <p>Lead Design Engineer at Tata Motors. Specializes in automotive design and manufacturing processes.</p>
+                        <p style="font-style: italic; margin-top: 1rem;">"Mock tests helped me manage time effectively in actual GATE"</p>
+                    </div>
+                    
+                    <div class="alumni-card">
+                        <div class="alumni-photo">
+                            <img src="https://via.placeholder.com/100x100/ffffff/ff6b6b?text=Alumni4" alt="Alumni 4" onerror="this.style.display='none'; this.parentNode.innerHTML='Photo Coming Soon';">
+                        </div>
+                        <h3>Sneha Gupta</h3>
+                        <div class="achievement-badge">GATE AIR 203</div>
+                        <div class="alumni-achievement">Project Manager</div>
+                        <p><strong>NIT Trichy - M.Tech CE</strong></p>
+                        <p>Project Manager at L&T Construction. Leading infrastructure development projects across India.</p>
+                        <p style="font-style: italic; margin-top: 1rem;">"NEEV Club's study materials were comprehensive and well-organized"</p>
+                    </div>
+                    
+                    <div class="alumni-card">
+                        <div class="alumni-photo">
+                            <img src="https://via.placeholder.com/100x100/ffffff/a8edea?text=Alumni5" alt="Alumni 5" onerror="this.style.display='none'; this.parentNode.innerHTML='Photo Coming Soon';">
+                        </div>
+                        <h3>Vikash Singh</h3>
+                        <div class="achievement-badge">GATE AIR 89</div>
+                        <div class="alumni-achievement">DRDO Scientist</div>
+                        <p><strong>IISc Bangalore - M.Tech EE</strong></p>
+                        <p>Research Scientist at DRDO. Working on advanced defense technologies and power systems.</p>
+                        <p style="font-style: italic; margin-top: 1rem;">"The mentorship I received was invaluable for my preparation"</p>
+                    </div>
+                    
+                    <div class="alumni-card">
+                        <div class="alumni-photo">
+                            <img src="https://via.placeholder.com/100x100/ffffff/ffecd2?text=Alumni6" alt="Alumni 6" onerror="this.style.display='none'; this.parentNode.innerHTML='Photo Coming Soon';">
+                        </div>
+                        <h3>Anita Verma</h3>
+                        <div class="achievement-badge">GATE AIR 134</div>
+                        <div class="alumni-achievement">Process Engineer</div>
+                        <p><strong>IIT Kharagpur - M.Tech ChE</strong></p>
+                        <p>Process Engineer at Reliance Industries. Expertise in petrochemical processes and plant optimization.</p>
+                        <p style="font-style: italic; margin-top: 1rem;">"Group study sessions made complex topics easier to understand"</p>
+                    </div>
+                     <div class="alumni-card">
+                        <div class="alumni-photo">
+                            <img src="https://via.placeholder.com/100x100/ffffff/4facfe?text=Alumni7" alt="Alumni 7" onerror="this.style.display='none'; this.parentNode.innerHTML='Photo Coming Soon';">
+                        </div>
+                        <h3>Ravi Gupta</h3>
+                        <div class="achievement-badge">SBI PO</div>
+                        <div class="alumni-achievement">Bank Manager</div>
+                        <p><strong>State Bank of India</strong></p>
+                        <p>Assistant Manager at SBI Mumbai. Transitioned from engineering to banking with NEEV's guidance.</p>
+                        <p style="font-style: italic; margin-top: 1rem;">"NEEV's banking prep module was exactly what I needed for career switch"</p>
+                    </div>
+                    
+                    <div class="alumni-card">
+                        <div class="alumni-photo">
+                            <img src="https://via.placeholder.com/100x100/ffffff/50c878?text=Alumni8" alt="Alumni 8" onerror="this.style.display='none'; this.parentNode.innerHTML='Photo Coming Soon';">
+                        </div>
+                        <h3>Meera Joshi</h3>
+                        <div class="achievement-badge">Campus Placed</div>
+                        <div class="alumni-achievement">TCS Senior Consultant</div>
+                        <p><strong>TCS - 12 LPA Package</strong></p>
+                        <p>Senior Consultant at TCS. Got placed directly from campus with excellent package through NEEV's placement training.</p>
+                        <p style="font-style: italic; margin-top: 1rem;">"Mock interviews and coding sessions were game-changers for my placement"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="activities" class="section">
+            <h2>Our Activities</h2>
+            <ul class="activities">
+                <li><strong>GATE Preparation:</strong> Weekly mock tests with detailed performance analysis</li>
+                <li><strong>GATE Focus:</strong> Subject-wise intensive study sessions for all branches</li>
+                <li><strong>Expert Sessions:</strong> Guest lectures by GATE toppers and industry experts</li>
+                <li><strong>Doubt Resolution:</strong> Regular doubt clearing sessions and one-on-one mentoring</li>
+                <li><strong>Placement Training:</strong> Technical interview preparation and coding bootcamps</li>
+                <li><strong>Banking Preparation:</strong> Quantitative aptitude and reasoning skill sessions</li>
+                <li><strong>Industry Exposure:</strong> Company visits and interaction with HR professionals</li>
+                <li><strong>Soft Skills:</strong> Communication skills and personality development workshops</li>
+                <li><strong>Study Resources:</strong> Comprehensive study material compilation and sharing</li>
+                <li><strong>Peer Learning:</strong> Group discussions and collaborative study circles</li>
+                <li><strong>Career Guidance:</strong> Counseling sessions for different career paths</li>
+                <li><strong>Alumni Network:</strong> Regular interaction with successful alumni across domains</li>
+            </ul>
+        </section>
+
+        <section id="contact" class="section">
+            <h2>Get In Touch</h2>
+            <div class="contact-info">
+                <div class="contact-card">
+                    <h3>📍 Visit Us</h3>
+                    <p>NEEV Club<br>
+                    Rustamji Institute of Technology<br>
+                    Campus Address</p>
+                </div>
+                
+                <div class="contact-card">
+                    <h3>📧 Email Us</h3>
+                    <p>gateclub@rit.edu<br>
+                    coordinator.gate@rit.edu</p>
+                </div>
+                
+                <div class="contact-card">
+                    <h3>📱 Call Us</h3>
+                    <p>+91-XXXX-XXXX-XX<br>
+                    Mon-Fri: 9AM-6PM</p>
+                </div>
+                
+                <div class="contact-card">
+                    <h3>🌐 Follow Us</h3>
+                    <p>Join our community<br>
+                    Social Media Links<br>
+                    Newsletter Signup</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 NEEV Club - Rustamji Institute of Technology</p>
+            <p>Empowering Future Engineers | Excellence Through Dedication</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.15)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Animate stats on scroll
+        const observerOptions = {
+            threshold: 0.7,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateValue(entry.target, 0, parseInt(entry.target.textContent), 2000);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.stat-number').forEach(stat => {
+            observer.observe(stat);
+        });
+
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const current = Math.floor(progress * (end - start) + start);
+                
+                if (element.textContent.includes('%')) {
+                    element.textContent = current + '%';
+                } else if (element.textContent.includes('+')) {
+                    element.textContent = current + '+';
+                } else if (element.textContent.includes('/')) {
+                    element.textContent = '24/7';
+                } else {
+                    element.textContent = current;
+                }
+                
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Add hover effects to cards
+        document.querySelectorAll('.team-member, .feature-card, .stat-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Add click effect to CTA button
+        document.querySelector('.cta-button').addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            ripple.style.position = 'absolute';
+            ripple.style.borderRadius = '50%';
+            ripple.style.background = 'rgba(255,255,255,0.6)';
+            ripple.style.transform = 'scale(0)';
+            ripple.style.animation = 'ripple 0.6s linear';
+            ripple.style.left = (e.clientX - e.target.offsetLeft) + 'px';
+            ripple.style.top = (e.clientY - e.target.offsetTop) + 'px';
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+
+        // Add CSS for ripple effect
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
